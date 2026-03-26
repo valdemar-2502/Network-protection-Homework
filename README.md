@@ -49,8 +49,20 @@
 
 ------
 ## Решение:
-
-
+![Network protection](https://github.com/valdemar-2502/Network-protection-Homework/blob/main/Screenshots/task1-attack-nmap.png)
+![Network protection](https://github.com/valdemar-2502/Network-protection-Homework/blob/main/Screenshots/task1-attack-nmap2.png)
+![Network protection](https://github.com/valdemar-2502/Network-protection-Homework/blob/main/Screenshots/task1-logs-suricata.png)
+![Network protection](https://github.com/valdemar-2502/Network-protection-Homework/blob/main/Screenshots/task1-logs-fail2ban.png)
+#### Suricata работает на сетевом уровне, обнаруживая разведку и аномальный трафик
+**Анализ логов:**
+1. Suricata обнаружила сетевую аномалию на уровне трафика.
+2. Были зафиксированны SYN и ACK сканирования, характерные для Nmap
+3. Определила SSH брутфорс по количеству подключений за единицу времени
+#### Fail2Ban работает на прикладном уровне, анализируя логи аутентификации и блокируя атакующих
+**Анализ логов:**
+1. Fail2Ban успешно обнаружил аномальную активность на уровне аутентификации
+2. Сработал порог maxretry = 3, IP атакующего был заблокирован
+3. Это предотвратило дальнейшие попытки подбора пароля
 ### Задание 2
 
 Проведите атаку на подбор пароля для службы SSH:
@@ -77,3 +89,8 @@
 *В качестве ответа пришлите события, которые попали в логи Suricata и Fail2Ban, прокомментируйте результат.*
 
 ## Решение
+![Network protection](https://github.com/valdemar-2502/Network-protection-Homework/blob/main/Screenshots/task2-attack-hydra.png)
+![Network protection](https://github.com/valdemar-2502/Network-protection-Homework/blob/main/Screenshots/task2-attack-hydra2.png)
+![Network protection](https://github.com/valdemar-2502/Network-protection-Homework/blob/main/Screenshots/task2-logs-fail2ban-hydra.png)
+#### Анализ логов:
+Fail2Ban успешно обнаружил атаку, заблокировал IP после 3 неудачных попыток, последующие попытки были отклонены на уровне фаервола. Защита сработала корректно.
